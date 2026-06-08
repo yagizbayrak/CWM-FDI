@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 
 
 # parameters to modify 
-filename="my_input.txt"
-label='label'
-xlabel = 'xlabel'
-ylabel = 'ylabel'
-title='Simple plot'
+filename="test.data"
+label='python'
+xlabel = 'icmp_seq'
+ylabel = 'time'
+title='Time for connection vs ping no'
 fig_name='my_graph.png'
 bins=100 #adjust the number of bins to your plot
 
