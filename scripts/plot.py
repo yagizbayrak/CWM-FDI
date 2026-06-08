@@ -4,12 +4,12 @@ import matplotlib.pyplot as plt
 
 
 # parameters to modify 
-filename="test.data"
+filename="time_py.txt"
 label='python'
-xlabel = 'icmp_seq'
+xlabel = 'runs'
 ylabel = 'time'
-title='Time for connection vs ping no'
-fig_name='my_graph.png'
+title='Running time across runs'
+fig_name='assignment2_plot_1.png'
 bins=100 #adjust the number of bins to your plot
 
 ## load data from input file
