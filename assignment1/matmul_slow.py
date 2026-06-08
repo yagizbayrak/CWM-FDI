@@ -8,6 +8,7 @@ so the computation has an observable result.
 
 import sys
 from typing import List
+import time
 
 Matrix = List[List[float]]
 
@@ -23,7 +24,6 @@ def init_matrix(n: int, seed: float) -> Matrix:
 #Zero out output entries.
 def zero_matrix(n: int) -> Matrix:
     return [[0.0 for _ in range(n)] for _ in range(n)]
-
 
 # Intentionally simple O(n^3) matrix multiplication.
 # This loop order is correct but cache-unfriendly for matrix B.
@@ -72,17 +72,28 @@ def parse_args(argv: list[str]) -> tuple[int, int]:
 
 def main(argv: list[str]) -> int:
     n, reps = parse_args(argv)
-
+    
+    
     #Initialise around a seed.
     a = init_matrix(n, 1.0)
     b = init_matrix(n, 2.0)
 
     c = zero_matrix(n)
-
+    time_start = time.perf_counter()
     for _ in range(reps):
         matmul_slow(a, b, c, n)
+    
+    time_end = time.perf_counter()
+    total_time = time_end - time_start
+    per_call = total_time / reps
+    per_cell = per_call / (n*n)
 
     print(f"n={n} reps={reps} checksum={checksum(c, n):.6f}")
+    print("Total time: ", total_time)
+    print("Time per call: ", per_call)
+    print("Time per cell: ", per_cell)
+    
+    
     return 0
 
 
