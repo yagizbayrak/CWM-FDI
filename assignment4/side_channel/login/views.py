@@ -32,27 +32,10 @@ def safe_check(username: str, password: str) -> bool:
     stub for safe password check
     To be completed by you!
     """
-    if username != SECRET_USERNAME:
-        return False
+    if password == SECRET_PASSWORD:
+        return True
 
-    result = True
-
-    for i, ch in enumerate(password):
-        # i == index of the current character
-        # ch == current character
-        
-        # code below is vulnerable. Fix it!
-        # then replace _vulnerable_check with safe_check in login_view() below
-        if i >= len(SECRET_PASSWORD) or ch != SECRET_PASSWORD[i]:
-            return False
-        time.sleep(DELAY_PER_CHAR)
-
-    return len(password) == len(SECRET_PASSWORD)
-
-
-
-
-
+    return False
 
 @csrf_exempt
 def login_view(request):
@@ -61,7 +44,7 @@ def login_view(request):
         password = request.POST.get("password", "")
 
         t0 = time.perf_counter()
-        success = _vulnerable_check(username, password) # replace with safe_check as neede!
+        success = safe_check(username, password) # replace with safe_check as neede!
         elapsed_ms = (time.perf_counter() - t0) * 1000
 
         if success:
