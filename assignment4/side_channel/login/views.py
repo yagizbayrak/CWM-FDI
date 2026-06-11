@@ -32,11 +32,16 @@ def safe_check(username: str, password: str) -> bool:
     stub for safe password check
     To be completed by you!
     """
-    if len(SECRET_PASSWORD) != len(password):
+    incor = 0
+    if username != SECRET_USERNAME:
         return False
-    for x,y in zip(SECRET_PASSWORD, password):
-        result = result | ord(x) ^ ord(y)
-    return result == 0
+
+    for i, ch in enumerate(password):
+        if i >= len(SECRET_PASSWORD) or ch != SECRET_PASSWORD[i]:
+            incor+=1
+        time.sleep(DELAY_PER_CHAR)
+
+    return len(password) == len(SECRET_PASSWORD) and incor = 0
 
 @csrf_exempt
 def login_view(request):
